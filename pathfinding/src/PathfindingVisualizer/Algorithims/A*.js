@@ -10,9 +10,7 @@ export function astar(grid, startNode, finishNode) {
     sortNodesByDistance(unvisitedNodes);
     const closestNode = unvisitedNodes.shift();
     if (closestNode.isWall) continue;
-
     if (closestNode === Infinity) return visitedNodesInOrder;
-
     closestNode.isVisited = true;
     visitedNodesInOrder.push(closestNode);
     console.log(closestNode.totalDistance);
