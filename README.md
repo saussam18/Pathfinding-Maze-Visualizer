@@ -1,4 +1,4 @@
-# Pathfinding-Maze-Visualizer
+# Pathfinding Algorithim Visualizer
 
 Welcome to my Pathfinding Visualizer Project inspired by a tutorial from Clement Mihailescu. It took me a while to finish between a lot of other activites I was doing and involved in and the fact that this was something complelty new for me in a lot of ways, but here is a version that is at a point where it can be published like this, so yay!
 
