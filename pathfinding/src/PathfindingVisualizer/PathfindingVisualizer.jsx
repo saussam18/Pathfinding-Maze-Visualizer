@@ -153,14 +153,14 @@ export default class PathfindingVisualizer extends Component {
     return (
       <>
         <div className="header">
-          <h1>Pathfinding Algorithim Visualizer</h1>
+          <h1>Pathfinding Algorithm Visualizer</h1>
           <h4 className="sub"> By Sam Sausville </h4>
           <button className="button" onClick={() => this.visualizeDijkstra()}>
             Visualize Dijkstra's Algorithm
           </button>
           <div className="divider" />
           <button className="button" onClick={() => this.visualizeAstar()}>
-            Visualize A* Algorithin
+            Visualize A* Algorithm
           </button>
           <div className="divider" />
           <button className="button" onClick={() => this.visualizeBFS()}>
