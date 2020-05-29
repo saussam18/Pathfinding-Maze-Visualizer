@@ -3,6 +3,7 @@ import Node from "./Node/Node";
 
 import "./PathfindingVisualizer.css";
 import { dijkstra, getNodesInShortestPathOrder } from "./Algorithims/Dijkstra";
+import { astar, getNodesInShortestPath } from "./Algorithims/A*";
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
@@ -75,12 +76,24 @@ export default class PathfindingVisualizer extends Component {
     this.animateDijkstra(vistedNodesInOrder, nodesInShortestPathOrder);
   }
 
+  visualizeAstar() {
+    const { grid } = this.state;
+    const startNode = grid[START_NODE_ROW][START_NODE_COL];
+    const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+    const vistedNodesInOrder = astar(grid, startNode, finishNode);
+    const nodesInShortestPathOrder = getNodesInShortestPath(finishNode);
+    this.animateDijkstra(vistedNodesInOrder, nodesInShortestPathOrder);
+  }
+
   render() {
     const { grid } = this.state;
     return (
       <>
         <button onClick={() => this.visualizeDijkstra()}>
           Visualize Dijkstra's Algorithm
+        </button>
+        <button onClick={() => this.visualizeAstar()}>
+          Visualize A* Algorithin
         </button>
         <div className="grid">
           {grid.map((row, rowIdx) => {
@@ -131,6 +144,8 @@ const createNode = (col, row) => {
     isStart: row === START_NODE_ROW && col === START_NODE_COL,
     isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
     distance: Infinity,
+    totalDistance: Infinity,
+    heuristic: Infinity,
     isVisited: false,
     isWall: false,
     previousNode: null
