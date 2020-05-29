@@ -8,9 +8,9 @@ import { bfs, getNodesInShortestPathBFS } from "./Algorithims/BFS";
 import { dfs, getNodesInShortestPathDFS } from "./Algorithims/DFS";
 
 const START_NODE_ROW = 10;
-const START_NODE_COL = 15;
+const START_NODE_COL = 10;
 const FINISH_NODE_ROW = 10;
-const FINISH_NODE_COL = 35;
+const FINISH_NODE_COL = 40;
 
 export default class PathfindingVisualizer extends Component {
   constructor(props) {
@@ -105,22 +105,76 @@ export default class PathfindingVisualizer extends Component {
     this.animateDijkstra(vistedNodesInOrder, nodesInShortestPathOrder);
   }
 
+  /*clearPath() {
+    const { grid } = this.state;
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[i].length; j++) {
+        const node = grid[i][j];
+        if (!node.isStart && !node.isFinish && !node.isWall) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node";
+          node.isVisited = false;
+        } else if (node.isStart) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-start";
+        } else if (node.isFinish) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-finish";
+        } else if (node.isWall) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-wall";
+        }
+      }
+    }
+  }*/
+
+  clearGrid() {
+    const grid = getInitialGrid();
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[i].length; j++) {
+        const node = grid[i][j];
+        if (!node.isStart && !node.isFinish && !node.isWall) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node";
+        } else if (node.isStart) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-start";
+        } else if (node.isFinish) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-finish";
+        }
+      }
+    }
+    this.setState({ grid });
+  }
+
   render() {
     const { grid } = this.state;
     return (
       <>
-        <button onClick={() => this.visualizeDijkstra()}>
-          Visualize Dijkstra's Algorithm
-        </button>
-        <button onClick={() => this.visualizeAstar()}>
-          Visualize A* Algorithin
-        </button>
-        <button onClick={() => this.visualizeBFS()}>
-          Visualize Breadth-First Search
-        </button>
-        <button onClick={() => this.visualizeDFS()}>
-          Visualize Depth-First Search
-        </button>
+        <div className="header">
+          <h1>Pathfinding Algorithim Visualizer</h1>
+          <h4 className="sub"> By Sam Sausville </h4>
+          <button className="button" onClick={() => this.visualizeDijkstra()}>
+            Visualize Dijkstra's Algorithm
+          </button>
+          <div className="divider" />
+          <button className="button" onClick={() => this.visualizeAstar()}>
+            Visualize A* Algorithin
+          </button>
+          <div className="divider" />
+          <button className="button" onClick={() => this.visualizeBFS()}>
+            Visualize Breadth-First Search
+          </button>
+          <div className="divider" />
+          <button className="button" onClick={() => this.visualizeDFS()}>
+            Visualize Depth-First Search
+          </button>
+          <div className="divider" />
+          <button className="button" onClick={() => this.clearGrid()}>
+            Clear Grid
+          </button>
+        </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
@@ -153,7 +207,7 @@ export default class PathfindingVisualizer extends Component {
 }
 const getInitialGrid = () => {
   const grid = [];
-  for (let row = 0; row < 20; row++) {
+  for (let row = 0; row < 21; row++) {
     const currentRow = [];
     for (let col = 0; col < 50; col++) {
       currentRow.push(createNode(col, row));
